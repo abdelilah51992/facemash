@@ -16,7 +16,7 @@ namespace Latelier.Facemash.Dal
         public FaceMashDbContext CreateDbContext(string[] args)
         {
             var builder = new DbContextOptionsBuilder<FaceMashDbContext>();
-            var connectionString = @"Server = (localdb)\v11.0; Database = FaceMash; Trusted_Connection = True;";
+            var connectionString = @"Server=tcp:smartmillmsater.database.windows.net,1433;Initial Catalog=LatelierFacemashFront20181021070139_db;Persist Security Info=False;User ID=abdelilah;Password=sm@rtmill2018;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
             builder.UseSqlServer(connectionString);
             return new FaceMashDbContext(builder.Options);
         }

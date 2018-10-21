@@ -7,13 +7,16 @@
         return JSON.parse(retrievedObject);
     };
     this.LoadAll = function () {
+        $(".ajax-busy-indicator").show();
         $.ajax({
             url: "/api/cat/all"
         }).done(function (data) {
             FaceMash.SaveInStorage(data);
 
-            if ($("#catsList").length === 0)
+            if ($("#catsList").length === 0) {
+                $(".ajax-busy-indicator").hide();
                 return;
+            }
             $.each(data, function (i, cat) {
                 $("#catsList").append(
                     '<div class="col-sm-6 col-md-4">' +
@@ -27,6 +30,7 @@
                     '</div>'
                 );
             });
+            $(".ajax-busy-indicator").hide();
         });
     };
     this.LoadPair = function () {
@@ -34,7 +38,7 @@
 
         if (cats === null || cats.length === 0) {
             FaceMash.LoadAll();
-            FaceMash.FaceMash();
+            FaceMash.LoadPair();
             return;
         }
         var leftIndex = this.getRandomIn(0, cats.length);
@@ -56,12 +60,16 @@
         );
     };
     this.Vote = function (htmlid) {
+        $(".ajax-busy-indicator").show();
         var id = $(htmlid).attr("data-id");
         $.ajax({
             url: "/api/cat/vote/" + id,
             method: "POST"
         }).done(function (data) {
             FaceMash.LoadPair();
+            $(".ajax-busy-indicator").hide();
+        }).fail(function () {
+            $(".ajax-busy-indicator").hide();
         });
     };
 
