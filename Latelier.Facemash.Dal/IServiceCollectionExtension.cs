@@ -17,7 +17,7 @@ namespace Latelier.Facemash.Dal
         /// <returns>services</returns>
         public static IServiceCollection AddFaceMashDalService(this IServiceCollection services)
         {
-            var connection = @"Server=tcp:smartmillmsater.database.windows.net,1433;Initial Catalog=LatelierFacemashFront20181021070139_db;Persist Security Info=False;User ID=abdelilah;Password=sm@rtmill2018;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+            var connection = @"";
             services.AddDbContext<FaceMashDbContext>
                 (options => options.UseSqlServer(connection));
 
